@@ -1,18 +1,21 @@
 #!/bin/bash
 
-echo 'creating ' $1 ' app'
+projectName=$1
+projectName="$( echo -e $projectName | tr '-' '_')"
+
+echo 'creating ' $projectName ' app'
 
 if [ $# > 0 ]
 then
-    if [ -e $1 ] && [ -d $1 ]
+    if [ -e $projectName ] && [ -d $projectName ]
     then 
         echo 'this folder already exist'
     else
-        mkdir $1 
-        cd $1
+        mkdir $projectName
+        cd $projectName
         touch setup.py
 
-        setup_data='from setuptools import setup\n\nsetup(\n\tname="'$1'",\n\tpackages=["'$1'"],\n\tinclude_package_data=True,\n\tinstall_requires=[\n\t\t"flask",\n\t\t"flask_sqlalchemy"\n\t],\n)'
+        setup_data='from setuptools import setup\n\nsetup(\n\tname="'$projectName'",\n\tpackages=["'$projectName'"],\n\tinclude_package_data=True,\n\tinstall_requires=[\n\t\t"flask",\n\t\t"flask_sqlalchemy"\n\t],\n)'
 
         echo -e $setup_data >> setup.py
 
@@ -22,12 +25,12 @@ then
             chmod +x run.sh
         fi
 
-        run_script='#!/bin/bash \nBASEDIR=$(dirname "$0")\ncd $BASEDIR\n\nexport FLASK_APP='$1'\nexport FLASK_ENV=development\nflask run'
+        run_script='#!/bin/bash \nBASEDIR=$(dirname "$0")\ncd $BASEDIR\n\nexport FLASK_APP='$projectName'\nexport FLASK_ENV=development\nflask run'
 
         echo -e $run_script >> run.sh
 
-        mkdir $1
-        cd $1
+        mkdir $projectName
+        cd $projectName
 
         touch __init__.py
 
