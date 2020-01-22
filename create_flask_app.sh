@@ -33,12 +33,12 @@ then
         run_script='#!/bin/bash \nBASEDIR=$(dirname "$0")\ncd $BASEDIR\n\nexport FLASK_APP='$projectName'\nexport FLASK_ENV=development\nflask run'
         echo -e $run_script >> run.sh
 
-		#Procfile use to push to heroku
-		touch Procfile
-		procfile_data='web: gunicorn '$projectName':app'
-		echo -e $procfile_data >> Procfile
+	#Procfile use to push to heroku
+	touch Procfile
+	procfile_data='web: gunicorn '$projectName':app'
+	echo -e $procfile_data >> Procfile
 
-		#folder who will contains source code
+	#folder which will contains source code
         mkdir $projectName
         cd $projectName
 
