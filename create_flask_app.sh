@@ -23,7 +23,7 @@ then
         setup_data='from setuptools import setup\n\nsetup(\n\tname="'$projectName'",\n\tpackages=["'$projectName'"],\n\tinclude_package_data=True,\n\tinstall_requires=[\n\t\t"flask",\n\t\t"flask_sqlalchemy"\n\t],\n)'
         echo -e $setup_data >> setup.py
 
-		#make run.sh exacutable 
+	#make run.sh executable 
         touch run.sh
         if [ ! -x $run.sh ]
         then 
@@ -33,12 +33,12 @@ then
         run_script='#!/bin/bash \nBASEDIR=$(dirname "$0")\ncd $BASEDIR\n\nexport FLASK_APP='$projectName'\nexport FLASK_ENV=development\nflask run'
         echo -e $run_script >> run.sh
 
-	#Procfile use to push to heroku
+	#Procfile used to push to heroku
 	touch Procfile
 	procfile_data='web: gunicorn '$projectName':app'
 	echo -e $procfile_data >> Procfile
 
-	#folder which will contains source code
+	#folder that will contains source code
         mkdir $projectName
         cd $projectName
 
