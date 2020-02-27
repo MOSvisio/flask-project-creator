@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#This script create a simple flask application 
+# This script create a simple flask application 
 
-# create by : SCHUTZ Lucas
+# Created by : SCHUTZ Lucas
 # http://lucas-schutz.tech
 
 projectName=$1
